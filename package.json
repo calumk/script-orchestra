@@ -1,0 +1,1 @@
+{ "dependencies": { "@tinyhttp/app": "^2.2.3", "@tinyhttp/cors": "^2.0.0", "i": "^0.3.7", "milliparsec": "^2.3.0", "sirv": "^2.0.4" } }

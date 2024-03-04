@@ -1,0 +1,58 @@
+{
+    "name" : "Calum's Scripts",
+    "version" : 0.1,
+    "description" : "A collection of scripts for Calum",
+    "command_groups" : [
+        {
+            "id" : "ping",
+            "name" : "Ping Commands",
+            "description" : "A selection of Ping commands",
+            "commands" : [
+                {
+                    "id" : "ping_google_3_times",
+                    "name" : "Ping Google 3 Times",
+                    "description" : "Good for testing network connectivity",
+                    "command" : ["ping", "-c", "3", "google.com"]
+                },
+                {
+                    "id" : "ping_google_10_times",
+                    "name" : "Ping Google 10 Times",
+                    "description" : "Good for testing network connectivity over a longer period of time",
+                    "command" : ["ping", "-c", "10", "google.com"]
+                }
+            ]
+        },
+        {
+            "id" : "ls",
+            "name" : "ls Commands",
+            "description" : "A selection of ls commands",
+            "commands" : [
+                {
+                    "id" : "ls_on_current_directory",
+                    "name" : "Run ls on current directory",
+                    "description" : "Just run the ls command on the current directory",
+                    "command" : ["ls", "-l"]
+                }
+            ]
+        },
+        {
+            "id" : "rclone",
+            "name" : "rClone Commands",
+            "description" : "A selection of Rclone commands",
+            "commands" : [
+                {
+                    "id" : "rlcone_sync_dryrun",
+                    "name" : "Rclone Sync (Dry Run)",
+                    "description" : "Tests the rclone sync command",
+                    "command" : ["rclone", "copy", "--exclude-if-present", ".rclone-ignore", "--config", "commands_data/rclone/rcloneconfig.conf", "onedrive_support_dsl:dsle-docs-bucket", "do_s3_dsl:dsle-docs", "-vv", "--dry-run"]
+                },
+                {
+                    "id" : "rlcone_sync",
+                    "name" : "Rclone Sync",
+                    "description" : "Runs the rclone sync command",
+                    "command" : ["rclone", "copy", "--exclude-if-present", ".rclone-ignore", "--config", "commands_data/rclone/rcloneconfig.conf", "onedrive_support_dsl:dsle-docs-bucket", "do_s3_dsl:dsle-docs", "-vv"]
+                }
+            ]
+        }
+    ]
+}

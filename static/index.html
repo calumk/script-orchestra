@@ -1,0 +1,38 @@
+<script src="https://unpkg.com/petite-vue" defer init></script>
+<script>
+	const webSocket = new WebSocket("ws://localhost:3002");
+	webSocket.onmessage = (event) => {
+		console.log(event);
+		let data = JSON.parse(event.data, null, 2);
+		console.log(data);
+		if (data.type == "output") {
+			let p = document.createElement("p");
+			p.innerHTML = data.data;
+			document.getElementById("time").appendChild(p);
+			document.getElementById("time").scrollTop =
+				document.getElementById("time").scrollHeight;
+		}
+		if (data.type == "running") {
+			if (data.data == true) {
+				document.getElementById("loadButton").disabled = true;
+			} else {
+				document.getElementById("loadButton").disabled = false;
+			}
+		}
+	};
+
+	let runCommand = () => {
+		fetch("/runcommand");
+	};
+</script>
+<h1>Test</h1>
+<button id="loadButton" onclick="runCommand()">Reload</button>
+<pre
+	id="time"
+	style="
+		background-color: #222;
+		color: #fff;
+		height: 500px;
+		overflow-y: scroll;
+	"
+></pre>
