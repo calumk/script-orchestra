@@ -1,6 +1,9 @@
 # @calumk/script-orchestra
 
 
+![alt text](splash_compressed.png)
+
+
 ## To Run
 
 Clone the repo.
