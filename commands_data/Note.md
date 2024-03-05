@@ -1,4 +1,2 @@
 
-# THIS DIRECTORY IS PUBLIC
-
-It is served at /commands_data
+# THIS DIRECTORY IS NOT SHARED, but could be vunerable to a path traversal attack

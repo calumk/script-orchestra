@@ -2,11 +2,13 @@
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute()
+import { getRouteShim } from "../routeshim.js";
+
 
 
 let command = ref({});
 let getCommand = async () => {
-  fetch("/getcommands", {
+  fetch(getRouteShim() + "/getcommands", {
     method: "GET",
   })
   .then((response) => response.json())
@@ -45,7 +47,7 @@ onMounted(() => {
 
 let runCommand = (group_id, command_id) => {
   // post to the server http request
-  fetch("/runCommand", {
+  fetch(getRouteShim() + "/runCommand", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +58,7 @@ let runCommand = (group_id, command_id) => {
 
 let clearCommand = async (group_id, command_id) => {
   // post to the server http request
-  await fetch("/clearCommand", {
+  await fetch(getRouteShim() + "/clearCommand", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +71,7 @@ let clearCommand = async (group_id, command_id) => {
 
 let killCommand = (group_id, command_id) => {
   // post to the server http request
-  fetch("/killCommand", {
+  fetch(getRouteShim() + "/killCommand", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

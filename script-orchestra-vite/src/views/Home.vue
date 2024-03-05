@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { getRouteShim } from "../routeshim.js";
+
+
 let command = ref({});
 let getCommand = async () => {
-  fetch("/getcommands", {
+  fetch(getRouteShim() + "/getcommands", {
     method: "GET",
   })
   .then((response) => response.json())

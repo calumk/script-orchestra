@@ -37,14 +37,20 @@
         },
         {
             "id" : "files",
-            "name" : "Generate Files",
-            "description" : "A selection of ls commands",
+            "name" : "Work With Files",
+            "description" : "A selection of file-based commands",
             "commands" : [
                 {
                     "id" : "files_generate_text_file",
                     "name" : "Generate a text file in the working directory",
-                    "description" : "Just run the ls command on the current directory",
+                    "description" : "Generates an empty text file 'foo.txt' in the working directory",
                     "command" : ["touch", "foo.txt"]
+                },
+                {
+                    "id" : "files_delete_text_file",
+                    "name" : "Delete a text file in the working directory",
+                    "description" : "Deletes a file 'foo.txt' in the working directory",
+                    "command" : ["rm", "foo.txt"]
                 }
             ]
         },

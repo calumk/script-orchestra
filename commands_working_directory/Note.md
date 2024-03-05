@@ -1,4 +1,4 @@
 
-# THIS DIRECTORY IS SEMI-PRIVATE
+# THIS DIRECTORY IS SHARED
 
-It is not served by the fileserver, but can be read/written by the server, so could be exposed using ls for example
+It is served by the fileserver and exposed 

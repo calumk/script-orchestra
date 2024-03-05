@@ -3,10 +3,16 @@ import { ref, onMounted } from "vue";
 import PanelMenu from 'primevue/panelmenu';
 import { useRouter } from 'vue-router'
 let $router = useRouter();
+import { getRouteShim } from "./routeshim.js";
+
+// import { routeshim } from "routeshim.js";
+
+// let routeshim  = ""
+
 
 let command_file = ref({});
 let getCommands = async () => {
-  fetch("/getcommands", {
+  fetch(getRouteShim()+"/getcommands", {
     method: "GET",
   })
   .then((response) => response.json())
@@ -60,8 +66,10 @@ let convertToPanelMenu = () => {
 <div class="mx-8">
   <h2 @click="$router.push('/')">@calumk/script-orchestra</h2>
   <div class="flex flex-row gap-3">
-      <div class="flex-none flex flex-column" style="width:400px">
+      <div class="flex-none flex flex-column" style="width: 20rem;">
         <PanelMenu :model="items" style="width: 20rem" />
+        <Divider></Divider>
+        <Button @click="$router.push('/files')" label="Files" severity="secondary"/>
       </div>
       <div class="flex-grow-1 flex flex-column" style="max-width: 800px;">
         <Panel>

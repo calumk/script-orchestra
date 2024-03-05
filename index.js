@@ -45,11 +45,21 @@ app.use(json())
 app.use('/', sirv('script-orchestra-vite/dist'))
 
 // Use the sirv middleware to serve the static files from the commands_data directory
-app.use('/commands_data', sirv('commands_data'))
+app.use('/commands_working_directory', sirv('commands_working_directory'))
+
+
+// we need to list all the files in the commands_working_directory
+// Create a new route to list all the files in the commands_working_directory
+app.get('/getFiles', (req, res) => {
+    let fs = require('fs');
+    let files = fs.readdirSync('commands_working_directory');
+    res.send(files)
+});
+
 
 // Create a new route to serve the commands.json file to the client
 // This is actually the modified commands_file object, with the running status added, and the output array
-app.get('/getcommands', (req, res) => {
+app.get('/getCommands', (req, res) => {
     res.send(commands_file)
 });
 
@@ -130,12 +140,16 @@ let actuallyRunTheCommand = async (group_id,command_id) =>{
     let allOtherCommands = command.slice(1)
 
 
+    let command_to_string = "$ " + command1 + " " + allOtherCommands.join(" ")
+
+
 
     // Run the command
     // This is the important bit!
     command_to_run.child_process = spawn(command1, allOtherCommands, {cwd:"commands_working_directory"});
 
-
+    ws.publish(JSON.stringify({ type: "command_data", group_id : group_id, command_id : command_id, data: command_to_string }))
+    ws.publish(JSON.stringify({ type: "status_data", group_id : group_id, command_id : command_id, status: "running" }))
 
 
     // You can also use a variable to save the output 

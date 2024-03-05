@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config';
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Command from './views/Command.vue'
+import Files from './views/Files.vue'
 
 // import './style.css'
 import 'primevue/resources/themes/aura-light-green/theme.css'
@@ -19,6 +20,7 @@ const router = createRouter({
     routes : [
         { path: '/', component: Home },
         { path: '/about', component: About },
+        { path: '/files', component: Files },
         {
             path: '/command/:group_id/:command_id', 
             name: 'Command',
