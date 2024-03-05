@@ -1,5 +1,7 @@
 name: my-bun-build
 on: push
+permissions:
+  contents: write
 jobs:
   my-job:
     name: my-job
