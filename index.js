@@ -42,7 +42,7 @@ app.options('*', cors())
 app.use(json())
 
 // Use the sirv middleware to serve the static files from the dist directory (the output of the Vite build)
-app.use('/', sirv('script-orchestra/dist'))
+app.use('/', sirv('script-orchestra-vite/dist'))
 
 // Use the sirv middleware to serve the static files from the commands_data directory
 app.use('/commands_data', sirv('commands_data'))
@@ -125,10 +125,9 @@ let actuallyRunTheCommand = async (group_id,command_id) =>{
     // command is an array of strings
     // get the first string and the rest of the strings as arguments
     // Shall we consider using https://stackoverflow.com/questions/57429987/nodejs-spawn-command-with-string-not-array ? 
-    
+
     let command1 = command[0]
     let allOtherCommands = command.slice(1)
-
 
 
 
