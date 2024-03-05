@@ -2,7 +2,11 @@
 
 A minimal application for running scripts remotely, and seeing the output.
 
-> Very much a WIP - No auth yet.
+> [!WARNING]
+> Very much a beta - No auth yet, no versioning, no tests, no error handling, no logging, no security, no nothing.
+
+
+> [!NOTE]
 > Pull Requests welcome! 
 
 ![splash image](splash.png)
