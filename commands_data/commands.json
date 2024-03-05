@@ -53,25 +53,6 @@
                     "command" : ["rm", "foo.txt"]
                 }
             ]
-        },
-        {
-            "id" : "rclone",
-            "name" : "rClone Commands",
-            "description" : "A selection of Rclone commands",
-            "commands" : [
-                {
-                    "id" : "rlcone_sync_dryrun",
-                    "name" : "Rclone Sync (Dry Run)",
-                    "description" : "Tests the rclone sync command",
-                    "command" : ["rclone", "copy", "--exclude-if-present", ".rclone-ignore", "--config", "commands_data/rclone/rcloneconfig.conf", "onedrive_support_dsl:dsle-docs-bucket", "do_s3_dsl:dsle-docs", "-vv", "--dry-run"]
-                },
-                {
-                    "id" : "rlcone_sync",
-                    "name" : "Rclone Sync",
-                    "description" : "Runs the rclone sync command",
-                    "command" : ["rclone", "copy", "--exclude-if-present", ".rclone-ignore", "--config", "commands_data/rclone/rcloneconfig.conf", "onedrive_support_dsl:dsle-docs-bucket", "do_s3_dsl:dsle-docs", "-vv"]
-                }
-            ]
         }
     ]
 }
