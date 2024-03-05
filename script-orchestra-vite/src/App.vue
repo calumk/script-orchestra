@@ -12,7 +12,7 @@ import { getRouteShim } from "./routeshim.js";
 
 let command_file = ref({});
 let getCommands = async () => {
-  fetch(getRouteShim()+"/getcommands", {
+  fetch(getRouteShim()+"/getCommands", {
     method: "GET",
   })
   .then((response) => response.json())
@@ -80,6 +80,7 @@ let convertToPanelMenu = () => {
       </div>
   </div>
 </div>
+Built
 </template>
 <style scoped>
   h2:hover{

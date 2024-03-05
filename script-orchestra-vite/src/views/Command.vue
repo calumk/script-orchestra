@@ -8,7 +8,7 @@ import { getRouteShim } from "../routeshim.js";
 
 let command = ref({});
 let getCommand = async () => {
-  fetch(getRouteShim() + "/getcommands", {
+  fetch(getRouteShim() + "/getCommands", {
     method: "GET",
   })
   .then((response) => response.json())

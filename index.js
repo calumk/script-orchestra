@@ -6,7 +6,18 @@ import { App } from '@tinyhttp/app'
 import { json } from 'milliparsec'
 import { cors } from '@tinyhttp/cors'
 import sirv from 'sirv'
+// 
+import html_page from './script-orchestra-vite/dist/index.html'
 
+let foo = Bun.file(html_page)
+let bar = await foo.text()
+
+// console.log(bar)
+
+
+// const someTextContent = require('./script-orchestra-vite/dist/index.html');
+// console.log(someTextContent)
+// let  html_string = html_page.toString()
 // The bunWsWrapper module is a wrapper around the built-in ws module, designed to simplify the process of creating a WebSocket server
 import { bunWsWrapper } from './bunWsWrapper.js'
 // we need to use the node child_process module to run the commands
@@ -42,7 +53,15 @@ app.options('*', cors())
 app.use(json())
 
 // Use the sirv middleware to serve the static files from the dist directory (the output of the Vite build)
-app.use('/', sirv('script-orchestra-vite/dist'))
+// app.use('/', sirv('script-orchestra-vite/dist'))
+
+app.get('/', (req, res) => {
+    // res.set('Content-Type', 'text/html')
+    res.send(bar)
+    // res.send("Thanks")
+});
+
+
 
 // Use the sirv middleware to serve the static files from the commands_data directory
 app.use('/commands_working_directory', sirv('commands_working_directory'))

@@ -11,6 +11,7 @@
   "dependencies": {
     "primeflex": "^3.3.1",
     "primevue": "^3.49.1",
+    "vite-plugin-singlefile": "^2.0.1",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   },
