@@ -1,0 +1,14 @@
+name: my-bun-build
+jobs:
+  my-job:
+    name: my-job
+    runs-on: ubuntu-latest
+    steps:
+      # do this
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+
+      # run any `bun` or `bunx` command
+      - run: bun install
+      - run: bun index.ts
+      - run: bun build index.js --compile --outfile experimental_build
