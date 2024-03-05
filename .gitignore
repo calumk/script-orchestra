@@ -21,4 +21,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-commands_data/rclone/rcloneconfig.conf
+
