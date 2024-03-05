@@ -13,7 +13,7 @@ import { bunWsWrapper } from './bunWsWrapper.js'
 var spawn = require('child_process').spawn;
 
 // open the commands.json and read the contents
-const path = "commands.json";
+const path = "commands_data/commands.json";
 const file = Bun.file(path);
 let commands_file = await file.json();
 

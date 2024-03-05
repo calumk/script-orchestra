@@ -5,7 +5,7 @@ A minimal application for running scripts remotely, and seeing the output.
 > Very much a WIP - No auth yet.
 > Pull Requests welcome! 
 
-![alt text](splash_compressed.png)
+![splash image](splash.png)
 
 
 ## To Run
