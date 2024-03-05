@@ -44,6 +44,9 @@ app.use(json())
 // Use the sirv middleware to serve the static files from the dist directory (the output of the Vite build)
 app.use('/', sirv('script-orchestra/dist'))
 
+// Use the sirv middleware to serve the static files from the commands_data directory
+app.use('/commands_data', sirv('commands_data'))
+
 // Create a new route to serve the commands.json file to the client
 // This is actually the modified commands_file object, with the running status added, and the output array
 app.get('/getcommands', (req, res) => {

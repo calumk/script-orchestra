@@ -22,7 +22,7 @@ $ bun i
 
 Edit the config file
 ```
-code commands.json
+code commands_data/commands.json
 ```
 
 
