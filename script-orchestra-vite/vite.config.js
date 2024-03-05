@@ -14,12 +14,12 @@ export default defineConfig({
       ]
     }),
     viteSingleFile(),
-    {
-      name: 'renameIndex',
-      enforce: 'post',
-      generateBundle(options, bundle) {
-        const indexHtml = bundle['index.html']
-        indexHtml.fileName = 'index.txt'
-    }}
+    // {
+    //   name: 'renameIndex',
+    //   enforce: 'post',
+    //   generateBundle(options, bundle) {
+    //     const indexHtml = bundle['index.html']
+    //     indexHtml.fileName = 'index.txt'
+    // }}
   ]
 })
