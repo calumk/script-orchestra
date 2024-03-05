@@ -7,7 +7,7 @@ A minimal application for running scripts remotely, and seeing the output.
 
 
 > [!NOTE]
-> Pull Requests welcome! 
+> Pull Requests welcome! :)
 
 ![splash image](splash.png)
 
