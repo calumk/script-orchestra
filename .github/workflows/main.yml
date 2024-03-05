@@ -5,10 +5,13 @@ jobs:
     name: my-job
     runs-on: ubuntu-latest
     steps:
-      - name: Build
+      - name: Checkout1
         uses: actions/checkout@v4
+      - name: Checkout2
         uses: oven-sh/setup-bun@v1
+      - name: Install
         run: bun i
+      - name: Build
         run: bun build index.js --compile --outfile experimental_build
       - name: Release
         uses: softprops/action-gh-release@v1
