@@ -1,22 +1,57 @@
-name: my-bun-build
-on: push
+name: Create Release
+
+on:
+  push
 permissions:
   contents: write
+
 jobs:
-  my-job:
-    name: my-job
+  create_release:
+    name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout1
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+
+  build_release:
+    name: Build Release
+    needs: create_release
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            release_suffix: ubuntu
+          - os: macos-latest
+            release_suffix: osx
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Checkout2
+
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v1
+
       - name: Install
         run: bun i
-      - name: Build
-        run: bun build index.js --compile --outfile experimental_build
+
+      - name: Run Linux Build
+        if: matrix.os == 'ubuntu-latest'
+        run: bun build index.js --compile --outfile experimental_build_ubuntu
+      
+      - name: Run Mac Build
+        if: matrix.os == 'macos-latest'
+        run: bun build index.js --compile --outfile experimental_build_osx
+
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: experimental_build
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
+          files: experimental_build_${{ matrix.release_suffix }}
+          
