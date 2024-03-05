@@ -121,13 +121,22 @@ let actuallyRunTheCommand = async (group_id,command_id) =>{
     command_to_run.status = "running"
 
     let command = command_to_run.command
+
     // command is an array of strings
     // get the first string and the rest of the strings as arguments
+    // Shall we consider using https://stackoverflow.com/questions/57429987/nodejs-spawn-command-with-string-not-array ? 
+    
     let command1 = command[0]
     let allOtherCommands = command.slice(1)
 
+
+
+
     // Run the command
-    command_to_run.child_process = spawn(command1, allOtherCommands);
+    // This is the important bit!
+    command_to_run.child_process = spawn(command1, allOtherCommands, {cwd:"commands_working_directory"});
+
+
 
 
     // You can also use a variable to save the output 

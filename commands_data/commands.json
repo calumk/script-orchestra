@@ -36,6 +36,19 @@
             ]
         },
         {
+            "id" : "files",
+            "name" : "Generate Files",
+            "description" : "A selection of ls commands",
+            "commands" : [
+                {
+                    "id" : "files_generate_text_file",
+                    "name" : "Generate a text file in the working directory",
+                    "description" : "Just run the ls command on the current directory",
+                    "command" : ["touch", "foo.txt"]
+                }
+            ]
+        },
+        {
             "id" : "rclone",
             "name" : "rClone Commands",
             "description" : "A selection of Rclone commands",
