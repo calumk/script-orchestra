@@ -43,13 +43,18 @@ You can rebuild the vite project, or run it in dev mode if you like, but you wil
 
 ## Experimental Build
 
-An Experimental build for OSX allows running the app as a standalone application. This is very much a work in progress, and is not recommended for use yet.
+An Experimental build for OSX/linux allows running the app as a standalone application. This is very much a work in progress, and is not recommended for use yet.
 
 To rebuild the app, run the following command:
 ```
-bun build index.js --compile --outfile standalone_osx_experimental
+bun build index.js --compile --outfile experimental_build
 ```
 
 > [!Note] 
 > The HTML file is bundled into the app, so you will need to rebuild the app if you change the HTML file.
 > The vite app is bundled into a single HTML file which is then embedded into the app!
+
+> [!Tip]
+> You still need the `commands_data` folder in the same directory as the app, as this is where the commands are stored.
+> 
+> You still need the `commands_working_directory` folder in the same directory as the app, as this is where the commands are run.
