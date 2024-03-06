@@ -24,6 +24,7 @@ import { bunWsWrapper } from './bunWsWrapper.js'
 var spawn = require('child_process').spawn;
 
 // open the commands.json and read the contents
+
 const path = "commands_data/commands.json";
 const file = Bun.file(path);
 let commands_file = await file.json();
@@ -87,7 +88,8 @@ app.get('/getCommands', (req, res) => {
 app.post('/runCommand', (req, res) => {
     let group_id = req.body.group_id
     let command_id = req.body.command_id
-    actuallyRunTheCommand(group_id, command_id)
+    let command_args = req.body.command_args
+    actuallyRunTheCommand(group_id, command_id, command_args)
     res.send("Running command")
 });
 
@@ -142,21 +144,42 @@ let actuallyKillTheCommand = (group_id,command_id) => {
     ws.publish(JSON.stringify({ type: "status_data", group_id : group_id, command_id : command_id, status: "killed" }))
 }
 
-let actuallyRunTheCommand = async (group_id,command_id) =>{ 
+let actuallyRunTheCommand = async (group_id,command_id, command_args) =>{ 
 
     // find the command to run given the group_id and command_id - these are properties of the objects
     let command_to_run = commands_file.command_groups.find(cg => cg.id == group_id).commands.find(c => c.id == command_id)
     // set the running status to true on the main commands_file object, so that the UI can update
     command_to_run.status = "running"
-
+    // the command to run is in the command_to_run.command property
     let command = command_to_run.command
+
+
+    // command is an array of strings
+    // we need to replace some of the strings with the command_args. 
+    // the arguments to replace are in the format {arg_name} 
+    // we need to replace {arg_name} with the value of the object that has the property "name" equal to arg_name
+    // the object is in the format { name: "arg_name", value: 0}
+
+    console.log(command_args)
+
+    let replaced_command = command.map(c => {
+        // if the string has the format {arg_name}
+        if (c.startsWith("{") && c.endsWith("}")) {
+            // find the object that has the property "name" equal to arg_name
+            let arg_name = c.slice(1,-1)
+            let arg_value = command_args.find(ca => ca.name == arg_name).value
+            return arg_value.toString()
+        } else {
+            return c
+        }
+    });
 
     // command is an array of strings
     // get the first string and the rest of the strings as arguments
     // Shall we consider using https://stackoverflow.com/questions/57429987/nodejs-spawn-command-with-string-not-array ? 
 
-    let command1 = command[0]
-    let allOtherCommands = command.slice(1)
+    let command1 = replaced_command[0]
+    let allOtherCommands = replaced_command.slice(1)
 
 
     let command_to_string = "$ " + command1 + " " + allOtherCommands.join(" ")

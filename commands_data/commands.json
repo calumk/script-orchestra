@@ -9,10 +9,24 @@
             "description" : "A selection of Ping commands",
             "commands" : [
                 {
-                    "id" : "ping_google_3_times",
-                    "name" : "Ping Google 3 Times",
+                    "id" : "ping_host_x_times",
+                    "name" : "Ping host X Times",
                     "description" : "Good for testing network connectivity",
-                    "command" : ["ping", "-c", "3", "google.com"]
+                    "command" : ["ping", "-c", "{count}", "{host}"],
+                    "args" : [
+                        {
+                            "name" : "count",
+                            "description" : "The number of times to ping",
+                            "type" : "number",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "host",
+                            "description" : "The host to ping",
+                            "type" : "string",
+                            "value" : "google.com"
+                        }
+                    ]
                 },
                 {
                     "id" : "ping_google_10_times",

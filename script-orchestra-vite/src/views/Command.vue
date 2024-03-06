@@ -45,14 +45,14 @@ onMounted(() => {
 })
 
 
-let runCommand = (group_id, command_id) => {
+let runCommand = (group_id, command_id, command_args = {}) => {
   // post to the server http request
   fetch(getRouteShim() + "/runCommand", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ group_id: group_id, command_id: command_id}),
+    body: JSON.stringify({ group_id: group_id, command_id: command_id, command_args : command_args}),
   });
 };
 
@@ -134,10 +134,26 @@ const webSocket = new WebSocket("ws://" + location.hostname + ":3002");
             padding:10px;
     ">$ {{ command.command_formatted }}</pre>
   <br/>
+
+  <!-- {{ command }} -->
+
+
+  <h3>Arguments</h3>
+  <div v-for="arg in command.args" :key="arg.name">
+    <h4>{{ arg.name }}</h4>
+    <p>{{ arg.description }}</p>
+    <!-- {{ arg }} -->
+    <InputNumber v-model="arg.value" v-if="arg.type == 'number'" showButtons/>
+    <InputText v-model="arg.value" v-if="arg.type == 'string'"/>
+  </div>
+  <br/>
+  <br/>
+
+
   <div class="flex flex-row justify-content-center gap-2 text-align-center" style="	text-align: center !important">
     <Button rounded 
       class="w-full justify-content-center " 
-      @click="runCommand(route.params.group_id, route.params.command_id)" 
+      @click="runCommand(route.params.group_id, route.params.command_id, command.args)" 
       :disabled="(command.status=='running') ? true : false 
     ">
       Run Command : {{ command.status }}
