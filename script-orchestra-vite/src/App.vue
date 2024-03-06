@@ -24,6 +24,8 @@ let getCommands = async () => {
 
 
 // we need to convert the command_groups to a PrimeVue PanelMenu model
+let time = import.meta.env.VITE_BUILD_TIMESTAMP
+
 const items = ref([]);
 let convertToPanelMenu = () => {
   let newItems = [];
@@ -80,7 +82,7 @@ let convertToPanelMenu = () => {
       </div>
   </div>
 </div>
-Built
+{{time}}:
 </template>
 <style scoped>
   h2:hover{
