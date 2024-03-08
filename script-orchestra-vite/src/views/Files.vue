@@ -20,7 +20,7 @@ onMounted(() => {
 
 // goToFile, simply redirects to the file, does not use the router
 let goToFile = (file) => {
-  window.location.href = routeshim + "/commands_working_directory/" + file;
+  window.location.href = getRouteShim() + "/commands_working_directory/" + file;
 }
 </script>
 <template>
