@@ -124,12 +124,12 @@ const webSocket = new WebSocket("ws://" + location.hostname + ":3002");
 
   <pre
     style="
-            background-color: green;
-            color: #fff;
+            background-color: #E2E8F0;
+            color: #000;
             overflow-y: scroll;
             width:100%;
             border-radius: 5px;
-            border: 1px solid #000;
+            /* border: 1px solid #000; */
             text-align: left !important;
             padding:10px;
     ">$ {{ command.command_formatted }}</pre>
@@ -138,14 +138,18 @@ const webSocket = new WebSocket("ws://" + location.hostname + ":3002");
   <!-- {{ command }} -->
 
 
-  <h3>Arguments</h3>
-  <div v-for="arg in command.args" :key="arg.name">
-    <h4>{{ arg.name }}</h4>
-    <p>{{ arg.description }}</p>
-    <!-- {{ arg }} -->
-    <InputNumber v-model="arg.value" v-if="arg.type == 'number'" showButtons/>
-    <InputText v-model="arg.value" v-if="arg.type == 'string'"/>
+  <Panel header="Arguments" toggleable collapsed v-if="command.args">
+  <div v-for="arg in command.args" :key="arg.name" class="flex flex-row gap-2 gutter-2 my-3">
+    <div class="flex flex-column" style="width:300px;">
+      <b>{{ arg.name }}</b>
+      {{ arg.description }}
+    </div>
+    <div class="flex flex-grow-1">
+      <InputNumber v-model="arg.value" v-if="arg.type == 'number'" showButtons style="width:100%" class="w-full"/>
+      <InputText v-model="arg.value" v-if="arg.type == 'string'" style="width:100%" class="w-full"/>
+    </div>
   </div>
+</Panel>
   <br/>
   <br/>
 
